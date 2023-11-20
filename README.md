@@ -169,3 +169,5 @@ We understand that our members represent a rich variety of backgrounds and persp
 - value each other's opinions and communicate in a respectful manner
 - keep confidential discussions that the community has of a personal (or professional) nature
 - use this opportunity together to discuss ways in which we can create an inclusive environment in this course and across the CUNY community
+#   B r a n d o n _ G a r d u n o _ F a v L i n k s _ W e b s i t e  
+ 
