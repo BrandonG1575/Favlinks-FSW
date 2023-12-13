@@ -4,9 +4,9 @@ module.exports = {
 
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'brandsql',
+  user: 'BrandSQL',
   host: 'localhost',
-  database: 'favlinks',
+  database: 'linksAPI',
   password: 'Gh8912',
   port: 5432,
 })
@@ -24,14 +24,18 @@ pool.query('INSERT INTO linksapi(name, url,...) VALUES(name, url)', (error, resu
 })
 
 //READ ROUTE (GET DATA FROM DATABASE)
-app.get('/api/links', (req, res) => {
-  pool.query('SELECT * FROM favlinks ORDER BY id ASC', (error, results) => {
+const getLinks = (req, res) => {
+  pool.query('SELECT * FROM favlinks ORDER BY id ASC', (error, result) => {
     if (error) {
       throw error
     }
-    res.status(200).json(results.rows)
+    res.status(200).json(result.rows)
   })
-})
+}
+
+module.exports = {
+  getLinks,
+}
 
 //UPDATE ROUTE (UPDATE A LINK IN THE DATABASE)
 app.post('/api/links/:id', (req,res) => {
