@@ -1,21 +1,18 @@
+const db = require('./db')
+
+app.get('/api/links', db.getLinks)
+
 const express = require('express')
+const cors = require('cors')
+const db = require('./db')
+const app = express()
+const port = 3000
 
-const path = require('path')
+app.use(express.json())
+app.use(cors())
 
-const app = express();
+app.get('/api/links', db.getLinks)
 
-const PORT = 3000
-
-const clientPath = path.resolve(__dirname, '../client/dist')
-
-app.use(express.static(clientPath))
-
-app.get('/', (req, res) => {
-  // we'll do some stuff here
-  res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'))
+app.listen(port, () => {
+  console.log(`App running on port ${port}.`)
 })
-
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`)
-})
-
