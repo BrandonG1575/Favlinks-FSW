@@ -1,3 +1,11 @@
+//EXPORTING CRUD FUNCTIONS
+module.exports = {
+  createLink,
+  getLinks,
+  updateLink,
+  deleteLink
+}
+
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'BrandSQL',
@@ -58,12 +66,4 @@ const deleteLink = (req, res) => {
     }
     response.status(200).send(`Link deleted with ID: ${id}`)
   })
-}
-
-//EXPORTING CRUD FUNCTIONS
-module.exports = {
-  createLink,
-  getLinks,
-  updateLink,
-  deleteLink
 }
