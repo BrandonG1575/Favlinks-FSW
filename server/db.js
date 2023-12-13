@@ -14,14 +14,16 @@ const pool = new Pool({
 //ROUTES
 
 //CREATE ROUTE(ADDS NEW LINK INTO DATABASE)
-app.post('/api/links', (req,res) => {
-pool.query('INSERT INTO linksapi(name, url,...) VALUES(name, url)', (error, results) => {
-  if (error) {
-    throw error
-  }
-  res.status(200).json(results.rows)
-})
-})
+const createLink = (req, res) => {
+  const{name, url} = request.body
+
+  pool.query('INSERT INTO favlinks (name, url) VALUES ($1, $2) RETURNING *', [name, email], (error, results) =>{
+    if (error) {
+      throw error
+    }
+    response.status(201).send(`Link added with ID: ${results.rows[0].id}`)
+  })
+}
 
 //READ ROUTE (GET DATA FROM DATABASE)
 const getLinks = (req, res) => {
@@ -33,26 +35,39 @@ const getLinks = (req, res) => {
   })
 }
 
-module.exports = {
-  getLinks,
+//UPDATE ROUTE (UPDATE A LINK IN THE DATABASE)
+const updateLink = (req, res) => {
+  const id = parseInt(request.params.id)
+  const {name, url} = request.body
+
+  pool.query(
+    'UPDATE favlinks SET name = $1, url = $2 WHERE id = $3',
+    [name, url, id],
+    (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).send(`Link modified with ID: ${id}`)
+    }
+  )
 }
 
-//UPDATE ROUTE (UPDATE A LINK IN THE DATABASE)
-app.post('/api/links/:id', (req,res) => {
-  pool.query('UPDATE favlinks SET (name), url WHERE (id)', (error, results) => {
-    if (error) {
-      throw error
-    }
-    res.status(200).json(results.rows)
-  })
-})
-
 //DELETE ROUTE (DELETE A SPECIFIC LINK IN DATABASE USING ID)
-app.post('/api/links/:id', (req,res) => {
-  pool.query('DELETE FROM favlinks WHERE (id)', (error, results)=> {
+const deleteLink = (req, res) => {
+  const id = parseInt(request.params.id)
+
+  pool.query('DELETE FROM favlinks WHERE id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
-    res.status(200).json(results.rows)
+    response.status(200).send(`Link deleted with ID: ${id}`)
   })
-})
+}
+
+//EXPORTING CRUD FUNCTIONS
+module.exports = {
+  createLink,
+  getLinks,
+  updateLink,
+  deleteLink
+}
