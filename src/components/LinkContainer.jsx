@@ -16,8 +16,44 @@ function LinkContainer(){
        // setfavlinks([favLink, ...favlinks]);
        setfavlinks([...favlinks, favLink]);
        //adds your new link to the bottom 
-
     }
+
+    //addding to Github
+    const getLinks = async () => {
+        try {
+          const response = await fetch('/api/links')
+          const data = await response.json()
+        } catch (error) {
+          console.error(error)
+        }
+      }
+    
+      const createLink = async () => {
+        try {
+          const response = await fetch('/api/links')
+          const data = await response.json()
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+      const updateLink = async () => {
+        try {
+          const response = await fetch('/api/links/:id')
+          const data = await response.json()
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+      const deleteLink = async () => {
+        try {
+          const response = await fetch('/api/links/:id')
+          const data = await response.json()
+        } catch (error) {
+          console.error(error)
+        }
+      }
 
     return(
         <div>
