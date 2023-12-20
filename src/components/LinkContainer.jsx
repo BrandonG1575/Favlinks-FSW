@@ -18,7 +18,8 @@ function LinkContainer(){
        //adds your new link to the bottom 
     }
 
-    //addding to Github
+    //Updated LinkContainer to connect with backend
+    //Updated remote repo to connect with FavLinks-FSW to push client changes to FSW repo
     const getLinks = async () => {
         try {
           const response = await fetch('/api/links')
